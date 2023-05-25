@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { styled } from "styled-components";
+import HomePage from "./pages/HomePage";
+import Topo from "./components/Topo";
+import TicketsPage from "./pages/TickersPage";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PagesContainer>
+      <Topo/>
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage/>}/>
+        <Route path="/passagens/:idCidade" element={<TicketsPage/>}/>
+        <Route path="/passagens/detalhes"/>
+        <Route path="/hospedagens/:idCidade"/>
+        <Route path="/hospedagens/detalhes"/>
+      </Routes>
+      </BrowserRouter>
+    </PagesContainer>
   );
 }
 
-export default App;
+const PagesContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+`
