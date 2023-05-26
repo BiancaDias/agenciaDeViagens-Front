@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import HomePage from "./pages/HomePage";
 import Topo from "./components/Topo";
 import TicketsPage from "./pages/TicketsPage";
+import TicketDetails from "./pages/TicketDetails";
 
 export default function App() {
   return (
@@ -12,7 +13,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage/>}/>
         <Route path="/passagens/:idCidade" element={<TicketsPage/>}/>
-        <Route path="/passagens/detalhes/:idPassagem"/>
+        <Route path="/passagens/detalhes/:idPassagem" element={<TicketDetails/>}/>
         <Route path="/hospedagens/:idCidade"/>
         <Route path="/hospedagens/detalhes/:idHospedagem"/>
       </Routes>
