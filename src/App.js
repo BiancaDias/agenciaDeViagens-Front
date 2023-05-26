@@ -4,6 +4,8 @@ import HomePage from "./pages/HomePage";
 import Topo from "./components/Topo";
 import TicketsPage from "./pages/TicketsPage";
 import TicketDetails from "./pages/TicketDetails";
+import AccommodationPage from "./pages/AccommodationPage";
+import AccommodationDetails from "./pages/AccommodationDetails";
 
 export default function App() {
   return (
@@ -14,8 +16,8 @@ export default function App() {
         <Route path="/" element={<HomePage/>}/>
         <Route path="/passagens/:idCidade" element={<TicketsPage/>}/>
         <Route path="/passagens/detalhes/:idPassagem" element={<TicketDetails/>}/>
-        <Route path="/hospedagens/:idCidade"/>
-        <Route path="/hospedagens/detalhes/:idHospedagem"/>
+        <Route path="/hospedagens/:idCidade" element={<AccommodationPage/>}/>
+        <Route path="/hospedagens/detalhes/:idHospedagem" element={<AccommodationDetails/>}/>
       </Routes>
       </BrowserRouter>
     </PagesContainer>

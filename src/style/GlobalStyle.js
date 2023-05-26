@@ -7,6 +7,12 @@ const GlobalStyle = createGlobalStyle`
         font-weight: 400;
         box-sizing: border-box;
     }
+    div{
+        font-family: 'Montserrat', sans-serif;
+    }
+    input{
+        font-family: 'Montserrat', sans-serif;
+    }
 `
 
 export default GlobalStyle
