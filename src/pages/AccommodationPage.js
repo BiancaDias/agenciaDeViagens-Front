@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components";
+import Topo from "../components/Topo";
 
 export default function AccommodationPage(){
     const { idCidade } = useParams();
@@ -22,12 +23,14 @@ export default function AccommodationPage(){
     }
 
     return(
+        <>
+        <Topo/>
         <ContainerPage>
             <Filter>
                 
             </Filter>
             <TicketsArea>
-                <h1>Passagens para {accommodation.city_dest_name}</h1>
+                <h1>Hospedagens em </h1>
                 
                 <ContainerTickets>
                     {accommodation.map((a)=>(
@@ -41,7 +44,7 @@ export default function AccommodationPage(){
                 </ContainerTickets>
             </TicketsArea>
         </ContainerPage>
-        
+        </>
     )
 }
 

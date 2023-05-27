@@ -1,9 +1,15 @@
+import { useNavigate } from "react-router-dom"
 import { styled } from "styled-components"
 
+
 export default function Topo(){
+    const navigate = useNavigate()
+    function goToHomePage(){
+        navigate("/")
+    }
     return(
         <Container>
-            <h1>Viagens Alucinantes</h1>
+            <h1 onClick={goToHomePage}>Viagens Alucinantes</h1>
         </Container>
     )
 }

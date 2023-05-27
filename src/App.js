@@ -10,7 +10,6 @@ import AccommodationDetails from "./pages/AccommodationDetails";
 export default function App() {
   return (
     <PagesContainer>
-      <Topo/>
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage/>}/>

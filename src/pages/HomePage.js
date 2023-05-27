@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { styled } from "styled-components"
+import Topo from "../components/Topo";
 
 export default function HomePage() {
     const navigate = useNavigate();
@@ -38,39 +39,42 @@ export default function HomePage() {
       };
 
     return (
-        <HomeContainer>
-            <ContainerInput onSubmit={seeTickets}>
-                <input
-                    type="text"
-                    id="search_input"
-                    value={search}
-                    onChange={handleSearch}
-                />
-                <ul>
-                    {filteredCities.map((city) => (
-                    <li
-                        key={city.id}
-                        onClick={() => handleClickCity(city.id,city.name)}
-                    >
-                        {city.name}
-                    </li>
-                    ))}
-                </ul>
-                <button>Ver Passagens</button>
-            </ContainerInput>
+        <>
+            <Topo/>
+            <HomeContainer>
+                <ContainerInput onSubmit={seeTickets}>
+                    <input
+                        type="text"
+                        id="search_input"
+                        value={search}
+                        onChange={handleSearch}
+                    />
+                    <ul>
+                        {filteredCities.map((city) => (
+                        <li
+                            key={city.id}
+                            onClick={() => handleClickCity(city.id,city.name)}
+                        >
+                            {city.name}
+                        </li>
+                        ))}
+                    </ul>
+                    <button>Ver Passagens</button>
+                </ContainerInput>
 
-            <ApresentacaoContainer>
-                <CaixaApresentacao>
-                    <p>1- Escolha a cidade que deseja visitar</p>
-                </CaixaApresentacao>
-                <CaixaApresentacao>
-                    <p>2- Veja as passagens disponíveis, com preços e datas</p>
-                </CaixaApresentacao>
-                <CaixaApresentacao>
-                    <p>3- Veja os locais onde você pode se hospedar e todo o conforto que eles oferecem!</p>
-                </CaixaApresentacao>
-            </ApresentacaoContainer>
-        </HomeContainer>
+                <ApresentacaoContainer>
+                    <CaixaApresentacao>
+                        <p>1- Escolha a cidade que deseja visitar</p>
+                    </CaixaApresentacao>
+                    <CaixaApresentacao>
+                        <p>2- Veja as passagens disponíveis, com preços e datas</p>
+                    </CaixaApresentacao>
+                    <CaixaApresentacao>
+                        <p>3- Veja os locais onde você pode se hospedar e todo o conforto que eles oferecem!</p>
+                    </CaixaApresentacao>
+                </ApresentacaoContainer>
+            </HomeContainer>
+        </>
     )
 }
 const ContainerInput = styled.form`

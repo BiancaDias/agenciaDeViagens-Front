@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components";
+import Topo from "../components/Topo";
 
 export default function TicketDetails(){
     const { idPassagem } = useParams();
@@ -25,18 +26,21 @@ export default function TicketDetails(){
         navigate("/hospedagens/"+ticket.city_dest)
     }
     return(
-        <ContainerTicket>
-            <h1>Passagem para {ticket.city_dest_name}</h1>
-            <ContainerDetails>
-                <p>Cidade de Destino: {ticket.city_dest_name}</p>
-                <p>Cidade de Origem: {ticket.city_orig}</p>
-                <p>Companhia Aérea: {ticket.cia_name}</p>
-                <p>Horário de Partida: {ticket.time_orig}</p>
-                <p>Previsão de Chegada: {ticket.time_dest}</p>
-                <p>Valor com Desconto Viagens Alucinantes: R$ {ticket.price / 100} </p>
-            </ContainerDetails>
-            <button onClick={seeAccommodations}>Ver opções de hospedagens</button>
-        </ContainerTicket>
+        <>
+            <Topo/>
+            <ContainerTicket>
+                <h1>Passagem para {ticket.city_dest_name}</h1>
+                <ContainerDetails>
+                    <p>Cidade de Destino: {ticket.city_dest_name}</p>
+                    <p>Cidade de Origem: {ticket.city_orig}</p>
+                    <p>Companhia Aérea: {ticket.cia_name}</p>
+                    <p>Horário de Partida: {ticket.time_orig}</p>
+                    <p>Previsão de Chegada: {ticket.time_dest}</p>
+                    <p>Valor com Desconto Viagens Alucinantes: R$ {ticket.price / 100} </p>
+                </ContainerDetails>
+                <button onClick={seeAccommodations}>Ver opções de hospedagens</button>
+            </ContainerTicket>
+        </>
     )
 }
 

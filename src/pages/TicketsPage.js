@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components";
+import Topo from "../components/Topo";
 
 export default function TicketsPage(){
     const { idCidade } = useParams();
@@ -19,27 +20,29 @@ export default function TicketsPage(){
     }
 
     return(
-        <ContainerPage>
-            <Filter>
-                
-            </Filter>
-            <TicketsArea>
-                <h1>Passagens para {tickets.city_dest_name}</h1>
-                
-                <ContainerTickets>
-                    {tickets.map((t)=>(
-                        <Tickets onClick={()=>seeDetails(t.id)}>
-                            <img src={t.logo}/>
-                            <p>10/06 - {t.time_orig}</p>
-                            <p>R$ {t.price /100},00</p>
-                            <p>{t.city_orig}</p>
-                        </Tickets>
-                    ))}
+        <>
+            <Topo/>
+            <ContainerPage>
+                <Filter>
                     
-                </ContainerTickets>
-            </TicketsArea>
-        </ContainerPage>
-        
+                </Filter>
+                <TicketsArea>
+                    <h1>Passagens para {tickets.city_dest_name}</h1>
+                    
+                    <ContainerTickets>
+                        {tickets.map((t)=>(
+                            <Tickets onClick={()=>seeDetails(t.id)}>
+                                <img src={t.logo}/>
+                                <p>10/06 - {t.time_orig}</p>
+                                <p>R$ {t.price /100},00</p>
+                                <p>{t.city_orig}</p>
+                            </Tickets>
+                        ))}
+                        
+                    </ContainerTickets>
+                </TicketsArea>
+            </ContainerPage>
+        </>
     )
 }
 
