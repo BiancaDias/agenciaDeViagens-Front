@@ -4,47 +4,94 @@ import { useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import Topo from "../components/Topo";
 
-export default function TicketsPage(){
-    const { idCidade } = useParams();
-    const [tickets, setTickets] = useState([])
-    const navigate = useNavigate();
-    useEffect(()=>{
-        axios.get(`${process.env.REACT_APP_API_URL}/cities/ticket/${idCidade}`)
-            .then(e => setTickets(e.data))
-            .catch(e => console.log(e))
-    },[])
+export default function TicketsPage() {
+  const { idCidade } = useParams();
+  const [tickets, setTickets] = useState([]);
+  const [minValue, setMinValue] = useState(0);
+  const [maxValue, setMaxValue] = useState();
+  const [maxValueInitial, setMaxValueInitial] = useState();
+  const navigate = useNavigate();
 
-    function seeDetails(id){
-        console.log(id)
-        navigate("/passagens/detalhes/"+id)
-    }
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/cities/ticket/${idCidade}`)
+      .then((response) => {
+        const data = response.data;
+        setTickets(data);
+        const maxPrice = Math.max(...data.map((ticket) => ticket.price));
+        setMaxValueInitial(maxPrice/100);
+        setMaxValue(maxPrice/100);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
-    return(
-        <>
-            <Topo/>
-            <ContainerPage>
-                <Filter>
-                    
-                </Filter>
-                <TicketsArea>
-                    <h1>Passagens para {tickets.city_dest_name}</h1>
-                    
-                    <ContainerTickets>
-                        {tickets.map((t)=>(
-                            <Tickets onClick={()=>seeDetails(t.id)}>
-                                <img src={t.logo}/>
-                                <p>10/06 - {t.time_orig}</p>
-                                <p>R$ {t.price /100},00</p>
-                                <p>{t.city_orig}</p>
-                            </Tickets>
-                        ))}
-                        
-                    </ContainerTickets>
-                </TicketsArea>
-            </ContainerPage>
-        </>
-    )
+  function seeDetails(id) {
+    console.log(id);
+    navigate("/passagens/detalhes/" + id);
+  }
+
+  function handleMinValueChange(event) {
+    setMinValue(event.target.value);
+  }
+
+  function handleMaxValueChange(event) {
+    setMaxValue(event.target.value);
+  }
+  const filteredTickets = tickets.filter((ticket) => {
+    const price = ticket.price / 100;
+    return price >= minValue && price <= maxValue;
+  });
+
+  return (
+    <>
+      <Topo />
+      <ContainerPage>
+        <Filter>
+          <h2>Filtros</h2>
+          <div>
+            <label htmlFor="minValue">Preço Mínimo:</label>
+            <input
+              type="range"
+              id="minValue"
+              min="0"
+              max={maxValue}
+              value={minValue}
+              onChange={handleMinValueChange}
+            />
+            <span>{minValue}</span>
+          </div>
+          <div>
+            <label htmlFor="maxValue">Preço Máximo:</label>
+            <input
+              type="range"
+              id="maxValue"
+              min={minValue}
+              max={maxValueInitial}
+              value={maxValue}
+              onChange={handleMaxValueChange}
+            />
+            <span>{maxValue}</span>
+          </div>
+        </Filter>
+        <TicketsArea>
+          <h1>Passagens para {tickets.city_dest_name}</h1>
+
+          <ContainerTickets>
+            {filteredTickets.map((t) => (
+              <Tickets key={t.id} onClick={() => seeDetails(t.id)}>
+                <img src={t.logo} alt="Logo" />
+                <p>10/06 - {t.time_orig}</p>
+                <p>R$ {t.price / 100},00</p>
+                <p>{t.city_orig}</p>
+              </Tickets>
+            ))}
+          </ContainerTickets>
+        </TicketsArea>
+      </ContainerPage>
+    </>
+  );
 }
+
 
 const ContainerPage = styled.div`
     width: 100%;
@@ -61,7 +108,9 @@ const ContainerTickets = styled.div`
 const Filter = styled.div`
     width: 300px;
     height: calc(100vh - 70px);
-    background-color: blue;
+    input{
+        width: 200px;
+    }
 `
 const TicketsArea = styled.div`
     display: flex;
@@ -89,5 +138,6 @@ const Tickets = styled.div`
     }
     img{
         width: 250px;
+        height: 120px;
     }
 `
