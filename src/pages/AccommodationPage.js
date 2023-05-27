@@ -7,12 +7,19 @@ import Topo from "../components/Topo";
 export default function AccommodationPage(){
     const { idCidade } = useParams();
     const [accommodation, setAccommodation] = useState([])
+
+    const [minValue, setMinValue] = useState(0);
+    const [maxValue, setMaxValue] = useState();
+    const [maxValueInitial, setMaxValueInitial] = useState();
     const navigate = useNavigate();
     useEffect(()=>{
         axios.get(`${process.env.REACT_APP_API_URL}/cities/accommodation/${idCidade}`)
             .then(e => {
                 console.log(e.data)
                 setAccommodation(e.data)
+                const maxPrice = Math.max(...e.data.map((accommodation) => accommodation.price));
+                setMaxValueInitial(maxPrice/100);
+                setMaxValue(maxPrice/100)
             })
             .catch(e => console.log(e))
     },[])
@@ -22,18 +29,55 @@ export default function AccommodationPage(){
         navigate("/hospedagens/detalhes/"+id)
     }
 
+    function handleMinValueChange(event) {
+        setMinValue(event.target.value);
+      }
+    
+      function handleMaxValueChange(event) {
+        setMaxValue(event.target.value);
+      }
+      const filteredAccommodation = accommodation.filter((accommodation) => {
+        const price = accommodation.price / 100;
+        return price >= minValue && price <= maxValue;
+      });
+    
+
     return(
         <>
         <Topo/>
         <ContainerPage>
             <Filter>
-                
+            <h2>Filtros</h2>
+          <div>
+            <label htmlFor="minValue">Preço Mínimo:</label>
+            <input
+              type="range"
+              id="minValue"
+              min="0"
+              max={maxValue}
+              value={minValue}
+              onChange={handleMinValueChange}
+            />
+            <span>{minValue}</span>
+          </div>
+          <div>
+            <label htmlFor="maxValue">Preço Máximo:</label>
+            <input
+              type="range"
+              id="maxValue"
+              min={minValue}
+              max={maxValueInitial}
+              value={maxValue}
+              onChange={handleMaxValueChange}
+            />
+            <span>{maxValue}</span>
+          </div>
             </Filter>
             <TicketsArea>
                 <h1>Hospedagens em </h1>
                 
                 <ContainerTickets>
-                    {accommodation.map((a)=>(
+                    {filteredAccommodation.map((a)=>(
                         <Tickets onClick={()=>seeDetails(a.id)}>
                             <img src={a.images[0]}/>
                             <p>{a.name}</p>
@@ -63,7 +107,9 @@ const ContainerTickets = styled.div`
 const Filter = styled.div`
     width: 300px;
     height: calc(100vh - 70px);
-    background-color: blue;
+    input{
+        width: 200px;
+    }
 `
 const TicketsArea = styled.div`
     display: flex;
