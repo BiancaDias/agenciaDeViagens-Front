@@ -7,9 +7,14 @@ export default function Topo(){
     function goToHomePage(){
         navigate("/")
     }
+
+    function goBack(){
+        navigate(-1)
+    }
     return(
         <Container>
             <h1 onClick={goToHomePage}>Viagens Alucinantes</h1>
+            <button onClick={goBack}>Voltar</button>
         </Container>
     )
 }

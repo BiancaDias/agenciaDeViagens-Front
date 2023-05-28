@@ -21,6 +21,7 @@ export default function TicketsPage() {
         const maxPrice = Math.max(...data.map((ticket) => ticket.price));
         setMaxValueInitial(maxPrice/100);
         setMaxValue(maxPrice/100);
+        console.log(response.data)
       })
       .catch((error) => console.log(error));
   }, []);
@@ -41,6 +42,10 @@ export default function TicketsPage() {
     const price = ticket.price / 100;
     return price >= minValue && price <= maxValue;
   });
+
+  if(tickets.length === 0){
+    return <>Carregando...</>
+  }
 
   return (
     <>
@@ -74,7 +79,7 @@ export default function TicketsPage() {
           </div>
         </Filter>
         <TicketsArea>
-          <h1>Passagens para {tickets.city_dest_name}</h1>
+          <h1>Passagens para {tickets[0].city_dest_name}</h1>
 
           <ContainerTickets>
             {filteredTickets.map((t) => (

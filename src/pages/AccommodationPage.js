@@ -11,17 +11,24 @@ export default function AccommodationPage(){
     const [minValue, setMinValue] = useState(0);
     const [maxValue, setMaxValue] = useState();
     const [maxValueInitial, setMaxValueInitial] = useState();
+    const [notFound, setNotFound] = useState(false)
+
     const navigate = useNavigate();
     useEffect(()=>{
         axios.get(`${process.env.REACT_APP_API_URL}/cities/accommodation/${idCidade}`)
             .then(e => {
-                console.log(e.data)
                 setAccommodation(e.data)
                 const maxPrice = Math.max(...e.data.map((accommodation) => accommodation.price));
                 setMaxValueInitial(maxPrice/100);
                 setMaxValue(maxPrice/100)
+                console.log(e.data)
+                if(e.data.length === 0){
+                    console.log("chega aqui")
+                    setNotFound(true)
+                }
             })
             .catch(e => console.log(e))
+        
     },[])
 
     function seeDetails(id){
@@ -41,10 +48,17 @@ export default function AccommodationPage(){
         return price >= minValue && price <= maxValue;
       });
     
+      if(!notFound && accommodation.length===0){
+        return (<>
+            <Topo/>
+            Carregando...
+        </>)
+      }
 
     return(
         <>
         <Topo/>
+        {notFound?<>Não há hoteis cadastrados para esta cidade</>:
         <ContainerPage>
             <Filter>
             <h2>Filtros</h2>
@@ -74,11 +88,11 @@ export default function AccommodationPage(){
           </div>
             </Filter>
             <TicketsArea>
-                <h1>Hospedagens em </h1>
+                <h1>Hospedagens em {accommodation[0].city_name}</h1>
                 
                 <ContainerTickets>
                     {filteredAccommodation.map((a)=>(
-                        <Tickets onClick={()=>seeDetails(a.id)}>
+                        <Tickets key={a.id} onClick={()=>seeDetails(a.id)}>
                             <img src={a.images[0]}/>
                             <p>{a.name}</p>
                             <p>R$ {a.price /100},00</p>
@@ -87,7 +101,7 @@ export default function AccommodationPage(){
                     
                 </ContainerTickets>
             </TicketsArea>
-        </ContainerPage>
+        </ContainerPage>}
         </>
     )
 }
