@@ -102,6 +102,7 @@ const ContainerPage = styled.div`
     width: 100%;
     height: calc(100vh - 70px);
     display: flex;
+    background-color: #f7f4e8;
 `
 
 const ContainerTickets = styled.div`
@@ -130,13 +131,15 @@ const TicketsArea = styled.div`
 const Tickets = styled.div`
     width: 250px;
     height: 300px;
-    background-color: pink;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
     margin-right: 30px;
     margin-top: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    cursor: pointer;
     p{
         font-size: 20px;
         font-weight: 600;
