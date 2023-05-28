@@ -10,6 +10,7 @@ export default function HomePage() {
     const [idCity, setIdCity] = useState();
     const [search, setSearch] = useState('');
     const [filteredCities, setFilteredCities] = useState([]);
+    const [notFound, setNotFound] = useState(false)
  
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_API_URL}/cities`)
@@ -18,22 +19,40 @@ export default function HomePage() {
 
     }, [search])
     function handleSearch(event){
+        setNotFound(false)
         const searchValue = event.target.value.toLowerCase();
         setSearch(searchValue);
 
         const filtered = cities.filter((city) =>
             city.name.toLowerCase().includes(searchValue)
         );
+        if(filtered.length === 0) setNotFound(true)
         setFilteredCities(filtered);
     };
     function seeTickets(e){
         e.preventDefault();
-        //ver caso depois em que idCity === null
+        let findCity = undefined;
+
+        if(!idCity){
+                findCity = cities.filter((city) =>
+                city.name.toLowerCase().includes(search.toLowerCase())
+            );
+           
+            if(findCity.length === 0){
+                setNotFound(true)
+                return;
+            }else{
+                console.log(findCity[0].id)
+                navigate("/passagens/"+findCity[0].id)
+                return;
+            }
+        }
+
         navigate("/passagens/"+idCity)
     }
     function handleClickCity(id, name){
         // Executar ação com o ID da cidade clicada
-        console.log('ID da cidade:', id);
+        //console.log('ID da cidade:', id);
         setIdCity(id);    
         setSearch(name)   
       };
@@ -50,14 +69,15 @@ export default function HomePage() {
                         onChange={handleSearch}
                     />
                     <ul>
-                        {filteredCities.map((city) => (
-                        <li
-                            key={city.id}
-                            onClick={() => handleClickCity(city.id,city.name)}
-                        >
-                            {city.name}
-                        </li>
-                        ))}
+                        {notFound?<li>Cidade não cadastrada! Tente outra</li>:
+                        filteredCities.map((city) => (
+                            <li
+                                key={city.id}
+                                onClick={() => handleClickCity(city.id,city.name)}
+                            >
+                                {city.name}
+                            </li>
+                            ))}
                     </ul>
                     <button>Ver Passagens</button>
                 </ContainerInput>
