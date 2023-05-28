@@ -62,12 +62,16 @@ export default function HomePage() {
             <Topo/>
             <HomeContainer>
                 <ContainerInput onSubmit={seeTickets}>
-                    <input
-                        type="text"
-                        id="search_input"
-                        value={search}
-                        onChange={handleSearch}
-                    />
+                    <div>
+                        <input
+                            type="text"
+                            id="search_input"
+                            value={search}
+                            onChange={handleSearch}
+                            placeholder="Busque pela cidade que deseja visitar!"
+                        />
+                        <button>Ver Passagens</button>
+                    </div>
                     <ul>
                         {notFound?<li>Cidade não cadastrada! Tente outra</li>:
                         filteredCities.map((city) => (
@@ -79,18 +83,21 @@ export default function HomePage() {
                             </li>
                             ))}
                     </ul>
-                    <button>Ver Passagens</button>
+                    
                 </ContainerInput>
 
                 <ApresentacaoContainer>
                     <CaixaApresentacao>
                         <p>1- Escolha a cidade que deseja visitar</p>
+                        <img alt="cidade logo" src="https://cdn-icons-png.flaticon.com/512/6260/6260160.png"/>
                     </CaixaApresentacao>
                     <CaixaApresentacao>
                         <p>2- Veja as passagens disponíveis, com preços e datas</p>
+                        <img alt="avião logo" src="https://cdn-icons-png.flaticon.com/512/1585/1585550.png"/>
                     </CaixaApresentacao>
                     <CaixaApresentacao>
-                        <p>3- Veja os locais onde você pode se hospedar e todo o conforto que eles oferecem!</p>
+                        <p>3- Veja os locais onde você pode se hospedar com todo o conforto!</p>
+                        <img alt="hospedagem logo" src="https://cdn.icon-icons.com/icons2/2818/PNG/512/beach_house_landscape_icon_179509.png"/>
                     </CaixaApresentacao>
                 </ApresentacaoContainer>
             </HomeContainer>
@@ -102,13 +109,30 @@ const ContainerInput = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
-    input{
+    div{
         width: 70%;
-        height: 50px;
+        display: flex;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+        input{
+            width: calc(100% - 20px);
+            height: 50px;
+            background-color: #fff;
+            border: 1px solid #fff;
+            font-size: 15px;
+            padding-left: 10px;
+        }
+        button{
+            border: #fff;
+            cursor: pointer;
+            background-color: #50c8c6;
+            font-weight: 600;
+        }
     }
     ul{
-        width: 70%;
-    }
+            width: 70%;
+            background-color: #fff;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+        }
 `
 const HomeContainer = styled.div`
     display:flex;
@@ -116,7 +140,9 @@ const HomeContainer = styled.div`
     align-items: center;
     justify-content: space-around;
     height: calc(100vh - 70px);
-    
+    background-image: url('https://content.presspage.com/uploads/685/c1920_fernandodenoronhabrazil-2.jpg?65057');
+    background-repeat: no-repeat;
+    background-size: cover;
 `
 
 const ApresentacaoContainer = styled.div`
@@ -127,10 +153,27 @@ const ApresentacaoContainer = styled.div`
 `
 
 const CaixaApresentacao = styled.div`
-    border: 1px solid black;
+    border: 1px solid #fff;
     width: 350px;
     height: 350px;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #fcfade;
+    border-radius: 15px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    opacity: 70%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 15px;
+    p{
+        font-size: 20px;
+        width: 100%;   
+        font-weight:600 ;
+    }
+    img{
+        width: 200px;
+        height: 200px;
+    }
 `
