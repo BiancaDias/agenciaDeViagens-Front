@@ -34,9 +34,9 @@ export default function TicketDetails(){
                     <p>Cidade de Destino: {ticket.city_dest_name}</p>
                     <p>Cidade de Origem: {ticket.city_orig}</p>
                     <p>Companhia Aérea: {ticket.cia_name}</p>
-                    <p>Horário de Partida: {ticket.time_orig}</p>
-                    <p>Previsão de Chegada: {ticket.time_dest}</p>
-                    <p>Valor com Desconto Viagens Alucinantes: R$ {ticket.price / 100} </p>
+                    <p>Horário de Partida: {ticket.time_orig.slice(0,5)}</p>
+                    <p>Previsão de Chegada: {ticket.time_dest.slice(0,5)}</p>
+                    <p>Valor com Desconto Viagens Alucinantes: R$ {ticket.price / 100},00 </p>
                 </ContainerDetails>
                 <button onClick={seeAccommodations}>Ver opções de hospedagens</button>
             </ContainerTicket>
@@ -50,8 +50,37 @@ const ContainerTicket = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #fff;
+    h1{
+        font-size: 30px;
+        font-weight: 600;
+        margin-top: 30px;
+    }
+    button{
+        border: #fff;
+        cursor: pointer;
+        background-color: #50c8c6;
+        font-weight: 600;
+        width: 200px;
+        height: 100px;
+        font-size: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+        margin-top: 30px;
+    }
 `
 
 const ContainerDetails = styled.div`
+    margin-top: 30px;
+    font-size: 20px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 15px;
+    font-weight: 500;
+    border-radius: 15px; 
+    background-color: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
 
 `
