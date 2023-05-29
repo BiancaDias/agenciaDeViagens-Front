@@ -110,8 +110,10 @@ const ContainerPage = styled.div`
     width: 100%;
     height: calc(100vh - 70px);
     display: flex;
+    background-image: url("https://www.melhoresdestinos.com.br/wp-content/uploads/2021/02/club-med-rio-das-pedras-4.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
 `
-
 const ContainerTickets = styled.div`
     padding-left: 50px;
     display: flex;
@@ -121,9 +123,44 @@ const ContainerTickets = styled.div`
 const Filter = styled.div`
     width: 300px;
     height: calc(100vh - 70px);
+    background-color: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 80%;
+    h2, label, span{
+      font-weight: 600;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
     input{
         width: 200px;
+        margin-bottom: 15px;
     }
+    input[type=range]{
+      -webkit-appearance: none;
+  }
+
+  input[type=range]::-webkit-slider-runnable-track {
+      width: 300px;
+      height: 5px;
+      background: #50c8c6;
+      border: none;
+      border-radius: 3px;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      border: none;
+      height: 16px;
+      width: 16px;
+      border-radius: 50%;
+      background: black;
+      margin-top: -4px;
+  }
+
 `
 const TicketsArea = styled.div`
     display: flex;
@@ -131,25 +168,33 @@ const TicketsArea = styled.div`
     align-items: center;
     width: calc(100% - 300px);
     h1{
+      margin-top: 30px;
         font-size: 50px;
+        color: #fff;
+        font-weight: 600;
     }
 `
 
 const Tickets = styled.div`
     width: 250px;
     height: 300px;
-    background-color: pink;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
     margin-right: 30px;
     margin-top: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    cursor: pointer;
+    background-color: #fff;
+    opacity: 80%;
     p{
-        font-size: 20px;
+        font-size: 25px;
         font-weight: 600;
     }
     img{
-        width: 250px;
+        width: 170px;
+        height: 120px;
     }
 `

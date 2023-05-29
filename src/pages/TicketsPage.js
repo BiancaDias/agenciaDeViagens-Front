@@ -127,7 +127,7 @@ const Filter = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    opacity: 50%;
+    opacity: 80%;
     h2, label, span{
       font-weight: 600;
       font-size: 18px;
@@ -186,7 +186,7 @@ const Tickets = styled.div`
     justify-content: space-around;
     cursor: pointer;
     background-color: #fff;
-    opacity: 60%;
+    opacity: 80%;
     p{
         font-size: 20px;
         font-weight: 600;
