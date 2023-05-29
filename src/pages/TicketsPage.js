@@ -107,7 +107,7 @@ const ContainerPage = styled.div`
     width: 100%;
     height: calc(100vh - 70px);
     display: flex;
-    background-image: url("https://img.freepik.com/fotos-premium/vista-aerea-do-aviao-sobre-punta-cana-republica-dominicana_188064-20.jpg?w=2000");
+    background-image: url("https://ceabbrasil.com.br/blog/wp-content/uploads/2022/05/Design-sem-nome.jpg");
     background-size: cover;
       background-repeat: no-repeat;
 `
@@ -170,6 +170,7 @@ const TicketsArea = styled.div`
         font-size: 50px;
         color: #fff;
         font-weight: 600;
+        text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
     }
 `
 

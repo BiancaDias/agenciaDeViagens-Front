@@ -58,7 +58,7 @@ export default function AccommodationPage(){
     return(
         <>
         <Topo/>
-        {notFound?<>Não há hoteis cadastrados para esta cidade</>:
+        {notFound?<ContainerEmpty>Não há hoteis cadastrados para esta cidade :(</ContainerEmpty>:
         <ContainerPage>
             <Filter>
             <h2>Filtros</h2>
@@ -105,6 +105,19 @@ export default function AccommodationPage(){
         </>
     )
 }
+const ContainerEmpty = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(100% - 70px);
+    font-size: 40px;
+    background-image: url("https://www.melhoresdestinos.com.br/wp-content/uploads/2021/02/club-med-rio-das-pedras-4.jpg");
+    color: #fff;
+    font-weight: 600;
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+`
 
 const ContainerPage = styled.div`
     width: 100%;
@@ -168,10 +181,11 @@ const TicketsArea = styled.div`
     align-items: center;
     width: calc(100% - 300px);
     h1{
-      margin-top: 30px;
+        margin-top: 30px;
         font-size: 50px;
         color: #fff;
         font-weight: 600;
+        text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
     }
 `
 
@@ -188,7 +202,7 @@ const Tickets = styled.div`
     justify-content: space-around;
     cursor: pointer;
     background-color: #fff;
-    opacity: 80%;
+    opacity: 100%;
     p{
         font-size: 25px;
         font-weight: 600;

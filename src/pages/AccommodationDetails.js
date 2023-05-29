@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { styled } from "styled-components"
 import Topo from "../components/Topo";
+import  Carousel  from "../components/Carousel";
+
 
 export default function AccommodationDetails(){
     const { idHospedagem } = useParams();
@@ -16,7 +18,7 @@ export default function AccommodationDetails(){
             .catch(e => alert(e))
     },[])
 
-
+    
     if(accommodation.length === 0){
         return <>Carregando</>
     }
@@ -25,19 +27,16 @@ export default function AccommodationDetails(){
             <Topo/>
             <ContainerDetails>
                 <h1>{accommodation.name}</h1>
-                <ContainerImages>
-                    {accommodation.images.map((i) => (
-                        <img src={i} key={i} />
-                    ))}
-                </ContainerImages>
+                <Carousel images={accommodation.images}/>
                 <Details>
                     <Characteristics>
-                        <p>Caracteristicas</p>
+                        <h2>Caracteristicas</h2>
                         <p>Descrição: {accommodation.description}</p>
                         <p>Local: {accommodation.city_name}</p>
-                        <p>Valor: {accommodation.price/100} a diaria</p>
+                        <p>Valor: R$ {accommodation.price/100},00 a diaria</p>
                     </Characteristics>
                     <Conveniences>
+                        <h2>Comodidades exclusivas</h2>
                         {accommodation.conveniences.map((c)=>(
                             <p>{c}</p>
                         ))}
@@ -53,24 +52,36 @@ const ContainerDetails = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-`
-
-const ContainerImages = styled.div`
-    display: flex;
-    img{
-        width: 300px;
+    h1{
+        font-size: 30px;
+        font-weight: 600;
+        margin: 40px;
     }
 `
 
+
 const Details = styled.div`
     display: flex;
+    width: 70%;
+    justify-content: space-between;
+    p{
+        margin-top: 15px;
+    }
+    h2{
+        font-size: 25px;
+        font-weight: 500;
+        margin-top: 30px;
+    }
 `
 
 const Characteristics = styled.div`
     display: flex;
     flex-direction: column;
+    width: 60%;
+    margin-right: 30px;
 `
 const Conveniences = styled.div`
     display: flex;
     flex-direction: column;
 `
+

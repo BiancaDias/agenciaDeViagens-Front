@@ -14,7 +14,7 @@ export default function Topo(){
     return(
         <Container>
             <LogoContainer>
-                <h1 onClick={goToHomePage}>Viagens Alucinantes</h1>
+                <h1 onClick={goToHomePage}>Viagens Relaxantes</h1>
                 <img alt="logo" src="https://cdn.icon-icons.com/icons2/1898/PNG/512/flight_121043.png"/>
             </LogoContainer>
             <button onClick={goBack}>Voltar</button>
@@ -37,6 +37,11 @@ const Container = styled.div`
         font-weight: 600;
         font-size: 20px;
         margin-right: 60px;
+        cursor: pointer;
+        width: 100px;
+        height: 30px;
+        border-radius:10px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
     }
 `
 
@@ -46,6 +51,7 @@ const LogoContainer = styled.div`
         margin-left: 60px;
         font-size: 30px;
         font-weight: 700;
+        cursor: pointer;
     }
     img{
         width: 30px;
