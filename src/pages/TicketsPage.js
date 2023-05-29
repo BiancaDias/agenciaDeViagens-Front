@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import Topo from "../components/Topo";
+import dayjs from "dayjs";
 
 export default function TicketsPage() {
   const { idCidade } = useParams();
@@ -11,8 +12,12 @@ export default function TicketsPage() {
   const [maxValue, setMaxValue] = useState();
   const [maxValueInitial, setMaxValueInitial] = useState();
   const navigate = useNavigate();
+  const [date, setDate ] = useState()
+  const day = dayjs();
 
   useEffect(() => {
+    const nextDay = day.add(1, 'day').format('DD/MM')
+    setDate(nextDay)
     axios
       .get(`${process.env.REACT_APP_API_URL}/cities/ticket/${idCidade}`)
       .then((response) => {
@@ -85,7 +90,7 @@ export default function TicketsPage() {
             {filteredTickets.map((t) => (
               <Tickets key={t.id} onClick={() => seeDetails(t.id)}>
                 <img src={t.logo} alt="Logo" />
-                <p>10/06 - {t.time_orig}</p>
+                <p>{date} - {t.time_orig.slice(0,5)}</p>
                 <p>R$ {t.price / 100},00</p>
                 <p>{t.city_orig}</p>
               </Tickets>
@@ -102,7 +107,9 @@ const ContainerPage = styled.div`
     width: 100%;
     height: calc(100vh - 70px);
     display: flex;
-    background-color: #f7f4e8;
+    background-image: url("https://img.freepik.com/fotos-premium/vista-aerea-do-aviao-sobre-punta-cana-republica-dominicana_188064-20.jpg?w=2000");
+    background-size: cover;
+      background-repeat: no-repeat;
 `
 
 const ContainerTickets = styled.div`
@@ -114,9 +121,44 @@ const ContainerTickets = styled.div`
 const Filter = styled.div`
     width: 300px;
     height: calc(100vh - 70px);
+    background-color: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 50%;
+    h2, label, span{
+      font-weight: 600;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
     input{
         width: 200px;
+        margin-bottom: 15px;
     }
+    input[type=range]{
+      -webkit-appearance: none;
+  }
+
+  input[type=range]::-webkit-slider-runnable-track {
+      width: 300px;
+      height: 5px;
+      background: #50c8c6;
+      border: none;
+      border-radius: 3px;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      border: none;
+      height: 16px;
+      width: 16px;
+      border-radius: 50%;
+      background: black;
+      margin-top: -4px;
+  }
+
 `
 const TicketsArea = styled.div`
     display: flex;
@@ -124,7 +166,10 @@ const TicketsArea = styled.div`
     align-items: center;
     width: calc(100% - 300px);
     h1{
+      margin-top: 30px;
         font-size: 50px;
+        color: #fff;
+        font-weight: 600;
     }
 `
 
@@ -140,12 +185,14 @@ const Tickets = styled.div`
     align-items: center;
     justify-content: space-around;
     cursor: pointer;
+    background-color: #fff;
+    opacity: 60%;
     p{
         font-size: 20px;
         font-weight: 600;
     }
     img{
-        width: 250px;
-        height: 120px;
+        width: 150px;
+        height: 100px;
     }
 `
