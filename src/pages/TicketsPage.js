@@ -73,7 +73,7 @@ export default function TicketsPage() {
               value={minValue}
               onChange={handleMinValueChange}
             />
-            <span>{minValue}</span>
+            <span>R$ {minValue},00</span>
           </div>
           <div>
             <label htmlFor="maxValue">Preço Máximo:</label>
@@ -85,7 +85,7 @@ export default function TicketsPage() {
               value={maxValue}
               onChange={handleMaxValueChange}
             />
-            <span>{maxValue}</span>
+            <span>R$ {maxValue},00</span>
           </div>
         </Filter>
         <TicketsArea>
@@ -132,7 +132,7 @@ const ContainerTickets = styled.div`
 `
 
 const Filter = styled.div`
-    width: 300px;
+    width: 340px;
     height: calc(100vh - 70px);
     background-color: #fff;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
@@ -147,7 +147,7 @@ const Filter = styled.div`
       margin-bottom: 15px;
     }
     input{
-        width: 200px;
+        width: 190px;
         margin-bottom: 15px;
     }
     input[type=range]{

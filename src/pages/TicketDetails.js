@@ -41,7 +41,7 @@ export default function TicketDetails(){
                     <p>Companhia Aérea: {ticket.cia_name}</p>
                     <p>Horário de Partida: {ticket.time_orig.slice(0,5)}</p>
                     <p>Previsão de Chegada: {ticket.time_dest.slice(0,5)}</p>
-                    <p>Valor com Desconto Viagens Alucinantes: R$ {ticket.price / 100},00 </p>
+                    <p>Valor: R$ {ticket.price / 100},00 </p>
                 </ContainerDetails>
                 <button onClick={seeAccommodations}>Ver opções de hospedagens</button>
             </ContainerTicket>
