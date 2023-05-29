@@ -19,7 +19,12 @@ export default function TicketDetails(){
             .catch(e => alert(e))
     }, [])
     if(ticket.length === 0){
-        return <>Carregando</>
+        return(
+            <>
+                <Topo/>
+                <Loading>Carregando...</Loading>
+            </>
+        )
     }
 
     function seeAccommodations(){
@@ -43,7 +48,15 @@ export default function TicketDetails(){
         </>
     )
 }
-
+const Loading = styled.div`
+    display: flex;
+    width: 100%;
+    height: calc(100% - 70px);
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    font-weight:600;
+`
 const ContainerTicket = styled.div`
     width: 100%;
     height: calc(100vh - 70px);

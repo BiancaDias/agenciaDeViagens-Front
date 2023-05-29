@@ -49,10 +49,12 @@ export default function AccommodationPage(){
       });
     
       if(!notFound && accommodation.length===0){
-        return (<>
-            <Topo/>
-            Carregando...
-        </>)
+        return(
+            <>
+                <Topo/>
+                <Loading>Carregando...</Loading>
+            </>
+        )
       }
 
     return(
@@ -105,6 +107,16 @@ export default function AccommodationPage(){
         </>
     )
 }
+const Loading = styled.div`
+    display: flex;
+    width: 100%;
+    height: calc(100% - 70px);
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    font-weight:600;
+`
+
 const ContainerEmpty = styled.div`
     display: flex;
     flex-direction: column;

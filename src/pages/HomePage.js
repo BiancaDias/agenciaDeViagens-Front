@@ -51,12 +51,17 @@ export default function HomePage() {
         navigate("/passagens/"+idCity)
     }
     function handleClickCity(id, name){
-        // Executar ação com o ID da cidade clicada
-        //console.log('ID da cidade:', id);
         setIdCity(id);    
         setSearch(name)   
       };
-
+    if(!cities){
+        return(
+            <>
+                <Topo/>
+                <Loading>Carregando...</Loading>
+            </>
+        )
+    }
     return (
         <>
             <Topo/>
@@ -104,6 +109,15 @@ export default function HomePage() {
         </>
     )
 }
+const Loading = styled.div`
+    display: flex;
+    width: 100%;
+    height: calc(100% - 70px);
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    font-weight:600;
+`
 const ContainerInput = styled.form`
     width: 100%;
     display: flex;
